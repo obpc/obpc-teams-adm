@@ -1,14 +1,14 @@
 <template>
     <h1>
-        Home
+        {{title}}
     </h1>
 </template>
 
 <script>
 export default {
-    setup() {
-        
-    },
+    props: {
+        title: String
+    }
 }
 </script>
 

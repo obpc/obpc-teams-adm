@@ -31,7 +31,8 @@ Route::get('/dashboard', function () {
 */
 
 Route::get('/home', function () {
-    return Inertia::render('Home');
+    return Inertia::render('Home', 
+    ['title' => "Aplicação OBPC"]);
 })->middleware(['auth', 'verified'])->name('home');
 
 require __DIR__.'/auth.php';
