@@ -14,6 +14,7 @@ class UpdatePeopleTable extends Migration
     public function up()
     {
         Schema::table('people', function (Blueprint $table) {
+            $table->char('sex', 1)->nullable()->change();
             $table->unsignedBigInteger('team_id')->nullable();
             $table->foreign('team_id')->references('id')->on('teams');
         });
