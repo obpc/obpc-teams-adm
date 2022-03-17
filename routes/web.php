@@ -2,6 +2,9 @@
 
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TeamsController;
+use App\Http\Controllers\PeopleController;
+use App\Http\Controllers\EventsController;
 use Inertia\Inertia;
 
 /*
@@ -34,5 +37,9 @@ Route::get('/home', function () {
     return Inertia::render('Home', 
     ['title' => "Aplicação OBPC"]);
 })->middleware(['auth', 'verified'])->name('home');
+
+Route::resource('teams', TeamsController::class);
+Route::resource('people', PeopleController::class);
+Route::resource('events', EventsController::class);
 
 require __DIR__.'/auth.php';

@@ -15,7 +15,7 @@ class PeopleController extends Controller
      */
     public function index()
     {
-        //
+        return Person::all();
     }
 
     /**
@@ -47,7 +47,7 @@ class PeopleController extends Controller
      */
     public function show(Person $person)
     {
-        //
+        return $person;
     }
 
     /**
