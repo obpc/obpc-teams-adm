@@ -39,6 +39,11 @@ const submit = () => {
             </div>
 
             <div class="mt-4">
+                <BreezeLabel for="cpf" value="cpf" />
+                <BreezeInput id="cpf" type="cpf" class="mt-1 block w-full" v-model="form.cpf" required autocomplete="cpf" />
+            </div>
+
+            <div class="mt-4">
                 <BreezeLabel for="password" value="Password" />
                 <BreezeInput id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="new-password" />
             </div>
