@@ -27,18 +27,18 @@ Route::get('/', function () {
     ]);
 });
 
-/* 
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
-*/
+
 
 Route::get('/home', function () {
-    return Inertia::render('Home', 
-    ['title' => "Aplicação OBPC"]);
+    return Inertia::render('Home',
+    ['title' => "Aplicação OBPC- teste"]);
 })->middleware(['auth', 'verified'])->name('home');
 
-Route::resource('teams', TeamsController::class);
+Route::get('/teams', [TeamsController::class, 'userTeams']);
 Route::resource('people', PeopleController::class);
 Route::resource('events', EventsController::class);
 

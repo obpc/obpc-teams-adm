@@ -42,4 +42,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getId(){
+        return $this->id;
+    }
+
+    public function person(){
+        return $this->hasOne(Person::class, 'user_id','id');
+    }
 }

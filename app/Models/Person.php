@@ -25,10 +25,6 @@ class Person extends Model
         return $this->hasOne(Person::class, 'id','couple_id');
     }
 
-    public function user(){
-        return $this->hasOne(User::class, 'id','user_id');
-    }
-
     public function situation(){
         return $this->hasOne(Situation::class, 'id','situation_id');
     }

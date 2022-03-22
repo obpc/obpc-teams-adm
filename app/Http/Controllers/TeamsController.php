@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTeamRequest;
 use App\Http\Requests\UpdateTeamRequest;
+use App\Models\Person;
 use App\Models\Team;
+use Illuminate\Http\Request;
+use Illuminate\Contracts\Session\Session;
+use Illuminate\Support\Facades\Auth;
 
 class TeamsController extends Controller
 {
@@ -82,5 +86,21 @@ class TeamsController extends Controller
     public function destroy(Team $team)
     {
         //
+    }
+
+    /**
+     * Returns teams of user
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function userTeams(Request $request)
+    {
+        $user = Auth::user();
+        $person = Person::firstWhere('user_id', $user->getId());
+        $teams['simple'] = [
+            Team::firstWhere('leader_id', $person->id), Team::firstWhere('timothy_id', $person->id), Team::firstWhere('hostess_id', $person->id)
+        ];
+        //$person = $person->user();
+        return var_dump("<pre>" . var_dump($teams) . "</pre>");
     }
 }

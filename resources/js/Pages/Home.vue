@@ -1,14 +1,15 @@
 <template>
     <h1>
-        {{title}}
+        {{$page.props.auth.user}}
     </h1>
+    <h2>
+        Teste testando
+    </h2>
 </template>
 
 <script>
 export default {
-    props: {
-        title: String
-    }
+
 }
 </script>
 
