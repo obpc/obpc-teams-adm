@@ -36,6 +36,14 @@ class CreateTeamsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('teams');
+        Schema::table('teams', function (Blueprint $table) {
+            $table->dropForeign(['leader_id']);
+            $table->dropColumn('leader_id');
+            $table->dropForeign(['timothy_id']);
+            $table->dropColumn('timothy_id');
+            $table->dropForeign(['hostess_id']);
+            $table->dropColumn('hostess_id');
+            $table->dropIfExists('teams');
+        });
     }
 }

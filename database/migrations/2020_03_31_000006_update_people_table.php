@@ -27,6 +27,9 @@ class UpdatePeopleTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('people', function (Blueprint $table) {
+            $table->dropForeign(['team_id']);
+            $table->dropColumn('team_id');
+        });
     }
 }

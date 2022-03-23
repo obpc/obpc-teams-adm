@@ -23,7 +23,7 @@ class CreatePeopleTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('situation_id')->nullable();
             $table->foreign('situation_id')->references('id')->on('situations');
-			$table->boolean('sex')->nullable();
+            $table->boolean('sex')->nullable();
             $table->unsignedBigInteger('spouse_id')->nullable();
             $table->foreign('spouse_id')->references('id')->on('people');
             $table->unsignedBigInteger('discipleship_partner_id')->nullable();
@@ -39,6 +39,16 @@ class CreatePeopleTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('people');
+        Schema::table('people', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
+            $table->dropColumn('user_id');
+            $table->dropForeign(['situation_id']);
+            $table->dropColumn('situation_id');
+            $table->dropForeign(['spouse_id']);
+            $table->dropColumn('spouse_id');
+            $table->dropForeign(['discipleship_partner_id']);
+            $table->dropColumn('discipleship_partner_id');
+            $table->dropIfExists('people');
+        });
     }
 }
