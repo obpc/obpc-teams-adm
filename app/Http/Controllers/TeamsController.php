@@ -19,7 +19,7 @@ class TeamsController extends Controller
      */
     public function index()
     {
-        //
+        return Team::all();
     }
 
     /**
@@ -40,7 +40,7 @@ class TeamsController extends Controller
      */
     public function store(StoreTeamRequest $request)
     {
-        //
+        return Team::create(($request->all()));
     }
 
     /**
@@ -51,7 +51,7 @@ class TeamsController extends Controller
      */
     public function show(Team $team)
     {
-        //
+        return $team;
     }
 
     /**
@@ -74,7 +74,8 @@ class TeamsController extends Controller
      */
     public function update(UpdateTeamRequest $request, Team $team)
     {
-        //
+        $team->update($request->all());
+        return $team;
     }
 
     /**
@@ -85,7 +86,8 @@ class TeamsController extends Controller
      */
     public function destroy(Team $team)
     {
-        //
+        $team->delete();
+        return $team;
     }
 
     /**
@@ -93,14 +95,17 @@ class TeamsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function userTeams(Request $request)
+    public function userTeams()
     {
         $user = Auth::user();
+        //return var_dump("<pre>" . var_dump($user) . "</pre>");
         $person = Person::firstWhere('user_id', $user->getId());
         $teams['simple'] = [
-            Team::firstWhere('leader_id', $person->id), Team::firstWhere('timothy_id', $person->id), Team::firstWhere('hostess_id', $person->id)
+            'leader' => Team::firstWhere('leader_id', $person->id),
+            'timothy' => Team::firstWhere('timothy_id', $person->id),
+            'hostess' => Team::firstWhere('hostess_id', $person->id)
         ];
         //$person = $person->user();
-        return var_dump("<pre>" . var_dump($teams) . "</pre>");
+        return var_dump("<pre>" . var_dump($teams['simple']) . "</pre>");
     }
 }

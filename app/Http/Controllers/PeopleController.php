@@ -36,7 +36,7 @@ class PeopleController extends Controller
      */
     public function store(StorePersonRequest $request)
     {
-        //
+        return Person::create(($request->all()));
     }
 
     /**
@@ -70,7 +70,8 @@ class PeopleController extends Controller
      */
     public function update(UpdatePersonRequest $request, Person $person)
     {
-        //
+        $person->update($request->all());
+        return $person;
     }
 
     /**
@@ -81,6 +82,7 @@ class PeopleController extends Controller
      */
     public function destroy(Person $person)
     {
-        //
+        $person->delete();
+        return $person;
     }
 }

@@ -38,7 +38,8 @@ Route::get('/home', function () {
     ['title' => "Aplicação OBPC- teste"]);
 })->middleware(['auth', 'verified'])->name('home');
 
-Route::get('/teams', [TeamsController::class, 'userTeams']);
+Route::get('/user-teams', [TeamsController::class, 'userTeams']);
+Route::resource('teams', TeamsController::class);
 Route::resource('people', PeopleController::class);
 Route::resource('events', EventsController::class);
 

@@ -15,7 +15,7 @@ class EventsController extends Controller
      */
     public function index()
     {
-        //
+        return Event::all();
     }
 
     /**
@@ -36,7 +36,7 @@ class EventsController extends Controller
      */
     public function store(StoreEventRequest $request)
     {
-        //
+        return Event::create(($request->all()));
     }
 
     /**
@@ -47,7 +47,7 @@ class EventsController extends Controller
      */
     public function show(Event $event)
     {
-        //
+        return $event;
     }
 
     /**
@@ -70,7 +70,8 @@ class EventsController extends Controller
      */
     public function update(UpdateEventRequest $request, Event $event)
     {
-        //
+        $event->update($request->all());
+        return $event;
     }
 
     /**
@@ -81,6 +82,7 @@ class EventsController extends Controller
      */
     public function destroy(Event $event)
     {
-        //
+        $event->delete();
+        return $event;
     }
 }
