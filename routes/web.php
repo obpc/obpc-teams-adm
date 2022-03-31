@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TeamsController;
 use App\Http\Controllers\PeopleController;
 use App\Http\Controllers\EventsController;
+use App\Http\Controllers\HomeController;
 use Inertia\Inertia;
 
 /*
@@ -33,12 +34,10 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
-Route::get('/home', function () {
-    return Inertia::render('Home',
-    ['title' => "Aplicação OBPC- teste"]);
-})->middleware(['auth', 'verified'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->middleware(['auth', 'verified'])->name('home');
 
 Route::get('/user-teams', [TeamsController::class, 'userTeams']);
+Route::post('/link-user', [PeopleController::class, 'userVinculate']);
 Route::resource('teams', TeamsController::class);
 Route::resource('people', PeopleController::class);
 Route::resource('events', EventsController::class);

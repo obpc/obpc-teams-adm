@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePersonRequest;
 use App\Http\Requests\UpdatePersonRequest;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Person;
+use Illuminate\Http\Request;
+
+;
 
 class PeopleController extends Controller
 {
@@ -84,5 +88,32 @@ class PeopleController extends Controller
     {
         $person->delete();
         return $person;
+    }
+
+    /**
+     * Returns a person-user relasionship
+     *
+     * @return array|object
+     */
+    public function userPerson()
+    {
+        $user = Auth::user();
+        return Person::where('user_id', $user->getId())->get();
+    }
+
+    /**
+     * Set a link with a person and logged user
+     *
+     * @param  int  $person_id
+     * @return \Illuminate\Http\Response
+     */
+    public function userVinculate(Request $request)
+    {
+        dd($request);
+        $person = Person::findOrFail($person_id)->get();
+        die($person);
+
+        //$person->update($request->all());
+        //return $person;
     }
 }

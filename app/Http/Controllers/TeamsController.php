@@ -6,8 +6,6 @@ use App\Http\Requests\StoreTeamRequest;
 use App\Http\Requests\UpdateTeamRequest;
 use App\Models\Person;
 use App\Models\Team;
-use Illuminate\Http\Request;
-use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\Facades\Auth;
 
 class TeamsController extends Controller
@@ -93,19 +91,17 @@ class TeamsController extends Controller
     /**
      * Returns teams of user
      *
-     * @return \Illuminate\Http\Response
+     * @return array|object
      */
     public function userTeams()
     {
         $user = Auth::user();
         //return var_dump("<pre>" . var_dump($user) . "</pre>");
         $person = Person::firstWhere('user_id', $user->getId());
-        $teams['simple'] = [
-            'leader' => Team::firstWhere('leader_id', $person->id),
-            'timothy' => Team::firstWhere('timothy_id', $person->id),
-            'hostess' => Team::firstWhere('hostess_id', $person->id)
-        ];
+
+        $teams= Team::whereIn(['leader_id', 'timothy_id', 'hostess_id'], $person->id);
         //$person = $person->user();
         return var_dump("<pre>" . var_dump($teams['simple']) . "</pre>");
     }
+
 }
