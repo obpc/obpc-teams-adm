@@ -98,7 +98,7 @@ class PeopleController extends Controller
     public function userPerson()
     {
         $user = Auth::user();
-        Person::where('user_id', $user->id)->get();
+        return Person::where('user_id', $user->id)->get();
     }
 
     /**
