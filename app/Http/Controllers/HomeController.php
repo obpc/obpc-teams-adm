@@ -20,7 +20,14 @@ class HomeController extends Controller
         $teams = new TeamsController();
 
         $peopleLinked = $people->userPerson()->count();
-        $teamsLinked =($peopleLinked == 1)?$teams->userTeams()->count():0;
+        if($peopleLinked == 1){
+            $teamsLinked = $teams->userTeams()->count();
+            $userData= $people->userPerson()->first();
+        }else{
+            $teamsLinked = 0;
+            $userData=null;
+        };
+        $userTeam = ($teamsLinked == 1)?$teams->userTeams()->first():null;
 
         return Inertia::render(
             'Home',
@@ -29,6 +36,8 @@ class HomeController extends Controller
                 'teamsLinked' => $teamsLinked,
                 'people' => $people->index(),
                 'teams' => $teams->index(),
+                'userTeam' => $userTeam,
+                'userData' => $userData,
             ]
         );
     }

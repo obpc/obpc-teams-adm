@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateTeamRequest;
 use App\Models\Person;
 use App\Models\Team;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class TeamsController extends Controller
 {
@@ -96,12 +97,26 @@ class TeamsController extends Controller
     public function userTeams()
     {
         $user = Auth::user();
-        //return var_dump("<pre>" . var_dump($user) . "</pre>");
-        $person = Person::firstWhere('user_id', $user->getId());
 
-        $teams= Team::whereIn(['leader_id', 'timothy_id', 'hostess_id'], $person->id);
-        //$person = $person->user();
-        return var_dump("<pre>" . var_dump($teams['simple']) . "</pre>");
+        $person = Person::where('user_id', $user->getId())->get()->first();
+
+        $teams = Team::where('leader_id', $person->id)->get();
+
+
+        return $teams;
     }
 
+    /**
+     * Returns macro teams
+     *
+     * @return array|object
+     */
+    public function macroTeams()
+    {
+        $teams = DB::table('teams')
+            ->whereColumn('macro_team_id', 'id')
+            ->orWhereNull('macro_team_id')->get();
+
+        return $teams;
+    }
 }

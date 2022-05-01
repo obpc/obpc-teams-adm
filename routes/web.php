@@ -41,5 +41,6 @@ Route::post('/link-user', [PeopleController::class, 'userVinculate']);
 Route::resource('teams', TeamsController::class);
 Route::resource('people', PeopleController::class);
 Route::resource('events', EventsController::class);
+Route::get('macro-teams', [TeamsController::class, 'macroTeams']);
 
 require __DIR__.'/auth.php';
