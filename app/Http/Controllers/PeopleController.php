@@ -98,7 +98,7 @@ class PeopleController extends Controller
     public function userPerson()
     {
         $user = Auth::user();
-        return Person::where('user_id', $user->getId())->get();
+        Person::where('user_id', $user->id)->get();
     }
 
     /**
@@ -110,8 +110,8 @@ class PeopleController extends Controller
     public function userVinculate(Request $request)
     {
         dd($request);
-        $person = Person::findOrFail($person_id)->get();
-        die($person);
+        //$person = Person::findOrFail($person_id)->get();
+        //die($person);
 
         //$person->update($request->all());
         //return $person;
