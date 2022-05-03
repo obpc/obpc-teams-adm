@@ -47,8 +47,8 @@
                             >
                                 {{ people[team.thimoty_id - 2].name }}
                             </option>
-                            <option v-else  selected="selected">Não definido</option>
-                            <option v-for="person in people">
+                            <option v-else selected="selected">Não definido</option>
+                            <option v-for="person in people" :key="person.id">
                                 {{ person.name }}
                             </option>
                         </select>
@@ -74,7 +74,7 @@
                                 {{ people[team.hostess_id - 2].name }}
                             </option>
                             <option v-else  selected="selected">Não definido</option>
-                            <option v-for="person in people">
+                            <option v-for="person in people" :key="person.id">
                                 {{ person.name }}
                             </option>
                         </select>

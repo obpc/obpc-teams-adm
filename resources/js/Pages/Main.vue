@@ -15,7 +15,7 @@
 
 <script>
 import NavButton from "@/Pages/NavButton.vue";
-import TeamEditForm from "@/Pages/TeamEditForm.vue";
+import TeamEditForm from "@/Pages/TeamEdit/TeamEditForm.vue";
 
 export default {
     name: "App",
